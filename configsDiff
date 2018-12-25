@@ -127,10 +127,10 @@
   host 10.104.26.16
 ! SECTION CHANGED ! host 10.121.16.16
  object-group network OBLADDR
-       host 82.117.251.142
+       host 4.4.4.4
 ! SECTION NOT FOUND IN config1 !
-  host 217.24.175.196
-! SECTION CHANGED ! host 91.142.165.82
+  host 5.5.5.5
+! SECTION CHANGED ! host 3.3.3.3
  object-group network TUN-MEMBERS
   172.20.0.0 255.255.0.0
   172.30.2.0 255.255.255.240

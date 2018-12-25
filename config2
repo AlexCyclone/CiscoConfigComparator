@@ -162,8 +162,8 @@ object-group network NAT
  host 10.121.16.16
 !
 object-group network OBLADDR 
- host 91.142.165.82
- host 82.117.251.142
+ host 3.3.3.3
+ host 4.4.4.4
 !
 object-group network TUN-MEMBERS 
  172.20.0.0 255.255.0.0
