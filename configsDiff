@@ -50,10 +50,9 @@
  no ip gratuitous-arps
  ip cef
  no ip dhcp use vrf connected
-      ip dhcp excluded-address 10.121.16.65
-! SECTION NOT FOUND IN config1 !
+ ip dhcp excluded-address 192.168.200.1
  ip dhcp excluded-address 10.104.26.65
-! SECTION CHANGED ! ip dhcp excluded-address 192.168.200.1
+! SECTION CHANGED ! ip dhcp excluded-address 10.121.16.65
  ip dhcp ping packets 4
  ip dhcp pool IP_Phones
   network 10.104.26.64 255.255.255.192
@@ -127,10 +126,9 @@
   host 10.104.26.16
 ! SECTION CHANGED ! host 10.121.16.16
  object-group network OBLADDR
-       host 4.4.4.4
-! SECTION NOT FOUND IN config1 !
+  host 3.3.3.3
   host 5.5.5.5
-! SECTION CHANGED ! host 3.3.3.3
+! SECTION CHANGED ! host 4.4.4.4
  object-group network TUN-MEMBERS
   172.20.0.0 255.255.0.0
   172.30.2.0 255.255.255.240
@@ -276,22 +274,28 @@
  interface FastEthernet0/1/5
        no cdp enable
 ! SECTION NOT FOUND IN config1 !
-  switchport voice vlan 200
+  switchport access vlan 100
 ! SECTION CHANGED ! switchport access vlan 222
+  switchport voice vlan 200
+! SECTION NOT FOUND IN config2 !
   auto qos voip
 ! SECTION NOT FOUND IN config2 !
   service-policy output AutoQoS-Policy-UnTrust
 ! SECTION NOT FOUND IN config2 !
  interface FastEthernet0/1/6
-  switchport voice vlan 200
+  switchport access vlan 100
 ! SECTION CHANGED ! switchport access vlan 221
+  switchport voice vlan 200
+! SECTION NOT FOUND IN config2 !
   auto qos voip
 ! SECTION NOT FOUND IN config2 !
   service-policy output AutoQoS-Policy-UnTrust
 ! SECTION NOT FOUND IN config2 !
  interface FastEthernet0/1/7
-  switchport voice vlan 200
+  switchport access vlan 100
 ! SECTION CHANGED ! switchport access vlan 220
+  switchport voice vlan 200
+! SECTION NOT FOUND IN config2 !
   auto qos voip
 ! SECTION NOT FOUND IN config2 !
   service-policy output AutoQoS-Policy-UnTrust

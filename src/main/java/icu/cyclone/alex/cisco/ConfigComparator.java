@@ -102,7 +102,8 @@ public class ConfigComparator {
         List<Node<ComparedSection>> children = startNode.getChildren();
         for (int i = 0; i < children.size(); i++) {
             String compared = children.get(i).getData().getCompared();
-            if (compared == null || !UText.firstWord(compared).equals(UText.firstWord(origin))) {
+            if (compared == null || children.get(i).getData().isEqual() != null ||
+                    !UText.firstWord(compared).equals(UText.firstWord(origin))) {
                 continue;
             }
             int diff = UDiff.differences(origin.split(" "), compared.split(" "));
