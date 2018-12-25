@@ -1,0 +1,531 @@
+'config1' compared to 'config2'
+ version 12.4
+ parser view localadmin
+  secret 5 $1$g1PL$M39BGA9Jthv1qfFdt9csD0
+! SECTION CHANGED ! secret 5 $1$qptk$eNT9/R/5hDTL0JgNxvZy61
+  commands exec exclude credential
+  commands exec include all ssh
+  commands exec include all telnet
+  commands exec include all traceroute
+  commands exec include all ping
+  commands exec exclude enable
+  commands exec include all reload
+  commands exec include all show
+ no service pad
+ service tcp-keepalives-in
+ service tcp-keepalives-out
+ service timestamps debug datetime msec localtime
+ service timestamps log datetime msec localtime
+ service password-encryption
+ service sequence-numbers
+ hostname R1861-nom
+! SECTION CHANGED ! hostname R1861-vov
+ boot-start-marker
+  boot system flash:c1861-advipservicesk9-mz.124-24.T8.bin
+  boot-end-marker
+ security passwords min-length 8
+ logging message-counter syslog
+ logging buffered 51200 notifications
+ no logging console
+ no logging monitor
+ enable secret 5 $1$.A1P$vHVQebiI538LdL9oIod7M/
+! SECTION CHANGED ! enable secret 5 $1$XZg6$mNnymhqPrLYAKWwUS0qK2/
+ aaa new-model
+ aaa authentication password-prompt "password: "
+ aaa authentication username-prompt "login as: "
+ aaa authentication login default local-case
+ aaa authentication login ENA local
+ aaa authorization exec default local
+ aaa authorization exec ENA local
+ aaa session-id common
+ clock timezone UA 2
+ clock summer-time UA recurring last Sun Mar 1:00 last Sun Oct 1:00
+ clock calendar-valid
+ mmi polling-interval 60
+ no mmi auto-configure
+ no mmi pvc
+ mmi snmp-timeout 180
+ dot11 syslog
+ no ip source-route
+ no ip gratuitous-arps
+ ip cef
+ no ip dhcp use vrf connected
+      ip dhcp excluded-address 10.121.16.65
+! SECTION NOT FOUND IN config1 !
+ ip dhcp excluded-address 10.104.26.65
+! SECTION CHANGED ! ip dhcp excluded-address 192.168.200.1
+ ip dhcp ping packets 4
+ ip dhcp pool IP_Phones
+  network 10.104.26.64 255.255.255.192
+! SECTION CHANGED ! network 10.121.16.64 255.255.255.192
+  default-router 10.104.26.65
+! SECTION CHANGED ! default-router 10.121.16.65
+  option 150 ip 10.11.2.20 10.11.2.21
+ ip dhcp pool Isolated
+  network 192.168.200.0 255.255.255.0
+  default-router 192.168.200.1
+  dns-server 8.8.8.8 8.8.4.4
+ no ip bootp server
+ ip domain timeout 2
+ ip domain name dp.fssu
+! SECTION CHANGED ! ip domain name kh.fssu
+ ip name-server 8.8.8.8
+ ip inspect udp idle-time 35
+ ip inspect tcp idle-time 1800
+ ip inspect tcp reassembly queue length 512
+ ip inspect tcp reassembly memory limit 2048
+ ip inspect name INSPECTRULE http
+ ip inspect name INSPECTRULE https
+ ip inspect name INSPECTRULE pop3
+ ip inspect name INSPECTRULE pop3s
+ ip inspect name INSPECTRULE imap
+ ip inspect name INSPECTRULE dns
+ ip inspect name INSPECTRULE ftp
+ ip inspect name INSPECTRULE sip
+ ip inspect name INSPECTRULE tcp router-traffic
+ ip inspect name INSPECTRULE udp router-traffic
+ ip inspect name INSPECTRULE icmp router-traffic
+ login block-for 30 attempts 3 within 30
+ login delay 3
+ login quiet-mode access-class FSEadmin
+ login on-failure log every 3
+ login on-success log
+ no ipv6 cef
+ multilink bundle-name authenticated
+ key chain EChain
+  key 1
+   key-string 7 023C540B1F033D336C7C580C08
+ voice-card 0
+ object-group network BOGONS
+  0.0.0.0 255.0.0.0
+  10.0.0.0 255.0.0.0
+  100.64.0.0 255.192.0.0
+  127.0.0.0 255.0.0.0
+  169.254.0.0 255.255.0.0
+  172.16.0.0 255.240.0.0
+  192.0.0.0 255.255.255.0
+  192.0.2.0 255.255.255.0
+  192.168.0.0 255.255.0.0
+  192.88.99.0 255.255.255.0
+  198.18.0.0 255.254.0.0
+  198.51.100.0 255.255.255.0
+  203.0.113.0 255.255.255.0
+  224.0.0.0 240.0.0.0
+  240.0.0.0 240.0.0.0
+ object-group network EXCLUSIVE
+ object-group network EXTADDR
+  host 1.1.1.1
+! SECTION CHANGED ! host 2.2.2.2
+ object-group service INBOUNDSERVICES
+  tcp eq 6022
+ object-group network NAT
+  192.168.200.0 255.255.255.0
+       10.121.16.128 255.255.255.128
+! SECTION NOT FOUND IN config1 !
+  10.104.26.128 255.255.255.128
+! SECTION NOT FOUND IN config2 !
+  host 10.104.26.16
+! SECTION CHANGED ! host 10.121.16.16
+ object-group network OBLADDR
+       host 82.117.251.142
+! SECTION NOT FOUND IN config1 !
+  host 217.24.175.196
+! SECTION CHANGED ! host 91.142.165.82
+ object-group network TUN-MEMBERS
+  172.20.0.0 255.255.0.0
+  172.30.2.0 255.255.255.240
+       10.121.1.12 255.255.255.252
+! SECTION NOT FOUND IN config1 !
+       10.121.16.8 255.255.255.252
+! SECTION NOT FOUND IN config1 !
+  10.104.1.12 255.255.255.252
+! SECTION NOT FOUND IN config2 !
+  10.104.26.8 255.255.255.252
+! SECTION NOT FOUND IN config2 !
+ object-group network V100INSPECT
+       10.121.16.128 255.255.255.128
+! SECTION NOT FOUND IN config1 !
+  10.104.26.128 255.255.255.128
+! SECTION NOT FOUND IN config2 !
+ vtp mode transparent
+ username fseadmin privilege 15 secret 5 $1$/0Id$FPmyPGaLTLOQaKJEfm2hH0
+! SECTION CHANGED ! username fseadmin privilege 15 secret 5 $1$MP04$iIpfS/iArf/X9SYzD4dL91
+ username regadmin view localadmin secret 5 $1$j23D$35SY2rZ6Na9BGHTiESZE7/
+! SECTION CHANGED ! username regadmin view localadmin secret 5 $1$R57E$EsGbiQMtMfp3zHlVyrVwF1
+ archive
+  log config
+   logging enable
+   hidekeys
+ vlan 10
+  name SRV
+ vlan 100
+  name Data
+ vlan 200
+  name Voice
+ vlan 220
+  name VPN-inside
+ vlan 221
+  name VPN-outside
+ vlan 222
+  name Internet
+ vlan 223
+  name MPLS
+ vlan 300
+  name MGMT
+ vlan 550
+  name Isolated
+ ip ssh port 6022 rotary 1
+ ip ssh version 2
+ class-map match-any AutoQoS-VoIP-Remark
+  match ip dscp ef
+  match ip dscp cs3
+  match ip dscp af31
+ class-map match-any AutoQoS-VoIP-Control-UnTrust
+  match access-group name AutoQoS-VoIP-Control
+ class-map match-any AutoQoS-VoIP-RTP-UnTrust
+  match protocol rtp audio
+  match access-group name AutoQoS-VoIP-RTCP
+ policy-map AutoQoS-Policy-UnTrust
+  class AutoQoS-VoIP-RTP-UnTrust
+   priority percent 70
+   set dscp ef
+  class AutoQoS-VoIP-Control-UnTrust
+   bandwidth percent 5
+   set dscp af31
+  class AutoQoS-VoIP-Remark
+   set dscp default
+  class class-default
+   fair-queue
+ interface Loopback0
+  ip address 10.104.26.16 255.255.255.255
+! SECTION CHANGED ! ip address 10.121.16.16 255.255.255.255
+  ip nat inside
+  ip virtual-reassembly
+ interface Tunnel0
+  bandwidth 100000
+  ip address 172.20.4.26 255.255.0.0
+! SECTION CHANGED ! ip address 172.20.21.16 255.255.0.0
+  ip access-group TUN-IN in
+  ip access-group TUN-OUT out
+  no ip redirects
+  ip mtu 1400
+  ip hold-time eigrp 1000 35
+  ip authentication mode eigrp 1000 md5
+  ip authentication key-chain eigrp 1000 EChain
+  ip nhrp authentication Z1mb@bV3
+  ip nhrp map multicast 91.142.165.82
+  ip nhrp map 172.20.0.1 91.142.165.82
+  ip nhrp network-id 101
+  ip nhrp holdtime 600
+  ip nhrp nhs 172.20.0.1
+  ip nhrp max-send 10000 every 10
+  ip nhrp registration timeout 200
+  ip nhrp shortcut
+  ip tcp adjust-mss 1360
+  delay 100
+  tunnel source Vlan222
+  tunnel mode gre multipoint
+  tunnel key 101
+ interface FastEthernet0/0
+  description MPLS
+  ip address 10.104.26.2 255.255.255.252
+! SECTION CHANGED ! ip address 10.121.16.2 255.255.255.252
+  no ip unreachables
+  duplex auto
+  speed auto
+  no cdp enable
+ interface FastEthernet0/1/0
+       switchport voice vlan 200
+! SECTION NOT FOUND IN config1 !
+       auto qos voip
+! SECTION NOT FOUND IN config1 !
+       service-policy output AutoQoS-Policy-UnTrust
+! SECTION NOT FOUND IN config1 !
+  switchport access vlan 220
+! SECTION CHANGED ! switchport access vlan 100
+ interface FastEthernet0/1/1
+       switchport voice vlan 200
+! SECTION NOT FOUND IN config1 !
+       auto qos voip
+! SECTION NOT FOUND IN config1 !
+       service-policy output AutoQoS-Policy-UnTrust
+! SECTION NOT FOUND IN config1 !
+  switchport access vlan 221
+! SECTION CHANGED ! switchport access vlan 100
+ interface FastEthernet0/1/2
+       switchport voice vlan 200
+! SECTION NOT FOUND IN config1 !
+       auto qos voip
+! SECTION NOT FOUND IN config1 !
+       service-policy output AutoQoS-Policy-UnTrust
+! SECTION NOT FOUND IN config1 !
+  switchport access vlan 222
+! SECTION CHANGED ! switchport access vlan 100
+  no cdp enable
+! SECTION NOT FOUND IN config2 !
+ interface FastEthernet0/1/3
+  switchport access vlan 100
+  switchport voice vlan 200
+  auto qos voip
+  service-policy output AutoQoS-Policy-UnTrust
+ interface FastEthernet0/1/4
+  switchport access vlan 100
+  switchport voice vlan 200
+  auto qos voip
+  service-policy output AutoQoS-Policy-UnTrust
+ interface FastEthernet0/1/5
+       no cdp enable
+! SECTION NOT FOUND IN config1 !
+  switchport voice vlan 200
+! SECTION CHANGED ! switchport access vlan 222
+  auto qos voip
+! SECTION NOT FOUND IN config2 !
+  service-policy output AutoQoS-Policy-UnTrust
+! SECTION NOT FOUND IN config2 !
+ interface FastEthernet0/1/6
+  switchport voice vlan 200
+! SECTION CHANGED ! switchport access vlan 221
+  auto qos voip
+! SECTION NOT FOUND IN config2 !
+  service-policy output AutoQoS-Policy-UnTrust
+! SECTION NOT FOUND IN config2 !
+ interface FastEthernet0/1/7
+  switchport voice vlan 200
+! SECTION CHANGED ! switchport access vlan 220
+  auto qos voip
+! SECTION NOT FOUND IN config2 !
+  service-policy output AutoQoS-Policy-UnTrust
+! SECTION NOT FOUND IN config2 !
+ interface FastEthernet0/1/8
+  shutdown
+ interface Vlan1
+  no ip address
+ interface Vlan10
+  description SRV
+  ip address 10.104.26.49 255.255.255.240
+! SECTION CHANGED ! ip address 10.121.16.49 255.255.255.240
+  ip access-group SrvIn in
+  ip access-group SrvOut out
+  ip nat inside
+  ip inspect INSPECTRULE in
+  ip virtual-reassembly
+ interface Vlan100
+  description Data
+  ip address 10.104.26.129 255.255.255.128
+! SECTION CHANGED ! ip address 10.121.16.129 255.255.255.128
+  ip access-group DataToAny in
+  ip access-group AnyToData out
+  ip nat inside
+  ip inspect INSPECTRULE in
+  ip virtual-reassembly
+ interface Vlan200
+  description Voice
+  ip address 10.104.26.65 255.255.255.192
+! SECTION CHANGED ! ip address 10.121.16.65 255.255.255.192
+ interface Vlan220
+  description to Gate
+  ip address 10.104.26.5 255.255.255.252
+! SECTION CHANGED ! ip address 10.121.16.5 255.255.255.252
+ interface Vlan221
+  description from Gate
+  ip address 10.104.26.9 255.255.255.252
+! SECTION CHANGED ! ip address 10.121.16.9 255.255.255.252
+ interface Vlan222
+  description ISP
+  ip address dhcp
+  ip access-group INBOUNDFILTERS in
+  ip access-group OUTBOUNDFILTERS out
+  no ip unreachables
+  no ip proxy-arp
+  ip nat outside
+  ip inspect INSPECTRULE out
+  ip virtual-reassembly max-reassemblies 512
+ interface Vlan223
+  description MPLS
+  no ip address
+  no ip unreachables
+  shutdown
+ interface Vlan300
+  description MGMT
+  ip address 10.104.26.33 255.255.255.240
+! SECTION CHANGED ! ip address 10.121.16.33 255.255.255.240
+ interface Vlan550
+  description Isolated
+  ip address 192.168.200.1 255.255.255.0
+  ip access-group IsolatedIN in
+  ip access-group IsolatedOUT out
+  no ip unreachables
+  no ip proxy-arp
+  ip nat inside
+  ip inspect INSPECTRULE in
+  ip virtual-reassembly
+ interface Dialer1
+  no ip address
+  ip mtu 1492
+  shutdown
+ router eigrp 1000
+  passive-interface default
+  no passive-interface Tunnel0
+  network 10.104.26.8 0.0.0.3
+! SECTION CHANGED ! network 10.121.16.8 0.0.0.3
+  network 172.20.0.0
+  distribute-list prefix EIGRP-OUT out
+  distribute-list prefix EIGRP-IN in
+  no auto-summary
+ router rip
+  version 2
+  passive-interface default
+  no passive-interface Vlan220
+  network 10.0.0.0
+  no auto-summary
+ ip forward-protocol nd
+ ip route 10.0.0.0 255.0.0.0 10.104.26.1 220
+! SECTION CHANGED ! ip route 10.0.0.0 255.0.0.0 10.121.16.1 220
+ ip route 10.104.0.0 255.255.0.0 10.104.26.1 220
+! SECTION CHANGED ! ip route 10.121.0.0 255.255.0.0 10.121.16.1 220
+ ip route 10.104.1.12 255.255.255.252 10.104.26.1 220
+! SECTION CHANGED ! ip route 10.121.1.12 255.255.255.252 10.121.16.1 220
+ ip route 10.104.255.0 255.255.255.0 10.104.26.6
+! SECTION CHANGED ! ip route 10.121.255.0 255.255.255.0 10.121.16.6
+ ip route 10.255.255.0 255.255.255.0 10.104.26.6
+! SECTION CHANGED ! ip route 10.255.255.0 255.255.255.0 10.121.16.6
+ ip route 172.16.0.0 255.240.0.0 10.104.26.1 220
+! SECTION CHANGED ! ip route 172.16.0.0 255.240.0.0 10.121.16.1 220
+ no ip http server
+ no ip http secure-server
+ ip dns view FSSU
+  logging
+  dns forwarder 10.11.6.91
+  dns forwarder 10.11.6.92
+  dns forwarding source-interface Loopback0
+ ip dns view default
+  domain timeout 2
+  dns forwarder 8.8.8.8
+ ip dns view-list DNS
+  view FSSU 10
+   restrict name-group 1
+  view default 100
+ ip dns name-list 1 permit .*\.EAIS\.LOCAL
+ ip dns name-list 1 permit .*\.FSI\.GOV\.UA
+ ip dns server view-group DNS
+ ip dns server
+ ip nat inside source route-map EXTERNAL interface Vlan222 overload
+ ip access-list standard FSEadmin
+  permit 10.0.0.0 0.0.0.255
+ ip access-list standard NTPSrv
+  permit 10.11.6.1
+ ip access-list standard SNMP
+  permit 10.11.6.97
+ ip access-list extended AnyToData
+  permit udp any any eq bootps
+  permit ip any object-group V100INSPECT
+ ip access-list extended AutoQoS-VoIP-Control
+  permit tcp any any eq 1720
+  permit tcp any any range 11000 11999
+  permit udp any any eq 2427
+  permit tcp any any eq 2428
+  permit tcp any any range 2000 2002
+  permit udp any any eq 1719
+  permit udp any any eq 5060
+ ip access-list extended AutoQoS-VoIP-RTCP
+  permit udp any any range 16384 32767
+ ip access-list extended DataToAny
+  permit udp any eq bootpc any
+  permit ip object-group V100INSPECT any
+ ip access-list extended ExtNAT
+  permit ip object-group NAT any
+ ip access-list extended INBOUNDFILTERS
+  permit udp any any eq bootpc
+  permit gre object-group OBLADDR object-group EXTADDR
+  deny   ip object-group BOGONS any
+  deny   ip any object-group BOGONS
+  deny   icmp any any fragments
+  permit icmp any object-group EXTADDR
+  permit ip object-group EXCLUSIVE object-group EXTADDR
+  permit object-group INBOUNDSERVICES any object-group EXTADDR
+ ip access-list extended IsolatedIN
+  permit udp any eq bootpc any
+  permit ip 192.168.200.0 0.0.0.255 host 192.168.200.1
+  deny   ip any object-group BOGONS
+  permit ip any any
+ ip access-list extended IsolatedOUT
+  permit udp any any eq bootps
+  permit ip host 192.168.200.1 192.168.200.0 0.0.0.255
+  deny   ip object-group BOGONS any
+  permit ip any any
+ ip access-list extended OUTBOUNDFILTERS
+  permit udp any eq bootps any
+  deny   ip any object-group BOGONS
+  permit ip object-group EXTADDR any
+ ip access-list extended SrvIn
+  permit ip any any
+ ip access-list extended SrvOut
+  permit ip any any
+ ip access-list extended TUN-IN
+  permit ip object-group TUN-MEMBERS object-group TUN-MEMBERS
+  permit eigrp any any
+ ip access-list extended TUN-OUT
+  permit ip object-group TUN-MEMBERS object-group TUN-MEMBERS
+  permit eigrp any any
+ ip prefix-list EIGRP-IN seq 10 permit 172.30.2.0/28
+ ip prefix-list EIGRP-IN seq 20 permit 10.104.1.12/30
+! SECTION CHANGED ! ip prefix-list EIGRP-IN seq 20 permit 10.121.1.12/30
+ ip prefix-list EIGRP-OUT seq 10 permit 10.104.26.8/30
+! SECTION CHANGED ! ip prefix-list EIGRP-OUT seq 10 permit 10.121.16.8/30
+ ip sla 1
+  icmp-echo 10.255.255.1 source-interface Vlan220
+  frequency 30
+ ip sla schedule 1 life forever start-time now
+ ip sla 2
+  icmp-echo 10.104.255.1 source-interface Vlan220
+! SECTION CHANGED ! icmp-echo 10.121.255.1 source-interface Vlan220
+  frequency 30
+ ip sla schedule 2 life forever start-time now
+ logging trap notifications
+ route-map EXTERNAL permit 10
+  match ip address ExtNAT
+  match interface Vlan222
+ snmp-server community fssu RO SNMP
+ control-plane
+ voice-port 0/0/0
+ voice-port 0/0/1
+ voice-port 0/0/2
+ voice-port 0/0/3
+ voice-port 0/1/0
+ voice-port 0/1/1
+ voice-port 0/1/2
+ voice-port 0/1/3
+ voice-port 0/4/0
+  auto-cut-through
+  signal immediate
+  input gain auto-control
+  description Music On Hold Port
+ banner login
+  ^
+UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED
+You must have explicit, authorized permission to access or configure this device.
+Unauthorized attempts and actions to access or use this system may result in criminal penalties.
+All activities performed on this device are logged and monitored.
+
+ line con 0
+  exec-timeout 5 0
+  logging synchronous
+  login authentication ENA
+  no modem enable
+ line aux 0
+  exec-timeout 0 0
+  logging synchronous
+ line vty 0 4
+  exec-timeout 5 0
+  session-limit 5
+  logging synchronous
+  rotary 1
+  transport input ssh
+  escape-character 3
+ scheduler allocate 20000 1000
+ scheduler interval 500
+ ntp source Vlan100
+ ntp access-group peer NTPSrv
+ ntp update-calendar
+ ntp server 10.11.6.1 prefer
+ end
