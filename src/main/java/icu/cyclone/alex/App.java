@@ -1,18 +1,23 @@
 package icu.cyclone.alex;
 
 import icu.cyclone.alex.cisco.ConfigComparator;
-import icu.cyclone.alex.utils.UFile;
-
-import java.io.IOException;
+import icu.cyclone.alex.cisco.InvalidConfigFormatException;
+import icu.cyclone.alex.cisco.reader.ConfigReader;
+import icu.cyclone.alex.cisco.reader.FileConfigReader;
+import icu.cyclone.alex.cisco.reader.InvalidReadDataException;
+import icu.cyclone.alex.cisco.reader.SSHConfigReader;
 
 public class App {
     public static void main(String[] args) {
-        ConfigComparator diff = new ConfigComparator("config1", "config2", 2);
+        ConfigReader cr1 = new FileConfigReader("config1");
+        ConfigReader cr2 = new SSHConfigReader("fseadmin", "121.Quetzalc0@tl.10",
+                "82.207.89.142", 6022);
+        ConfigComparator diff;
         try {
-            UFile.writeString("configsDiff", diff.fullView());
-        } catch (IOException e) {
+            diff = new ConfigComparator(cr1, cr2, 2);
+            System.out.println(diff.fullView());
+        } catch (InvalidReadDataException | InvalidConfigFormatException e) {
             e.printStackTrace();
         }
-
     }
 }

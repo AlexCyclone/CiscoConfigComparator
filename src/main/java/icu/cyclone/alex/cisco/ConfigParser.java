@@ -1,6 +1,6 @@
 package icu.cyclone.alex.cisco;
 
-import icu.cyclone.alex.utils.InvalidFileFormatException;
+import icu.cyclone.alex.cisco.reader.InvalidReadDataException;
 import icu.cyclone.alex.utils.Node;
 import icu.cyclone.alex.utils.Tree;
 import icu.cyclone.alex.utils.UText;
@@ -8,12 +8,12 @@ import icu.cyclone.alex.utils.UText;
 import java.util.ArrayList;
 
 class ConfigParser {
-    static Tree<String> parse(ArrayList<String> text) throws InvalidFileFormatException {
+    static Tree<String> parse(ArrayList<String> text) throws InvalidConfigFormatException {
         preParse(text);
         return startParse(text);
     }
 
-    private static void preParse(ArrayList<String> text) throws InvalidFileFormatException {
+    private static void preParse(ArrayList<String> text) throws InvalidConfigFormatException {
         reformatBanners(text);
         text.removeIf(ConfigParser::isEmptyLine);
         contractionSpaces(text, 0, text.size() - 1, 0);
@@ -61,8 +61,8 @@ class ConfigParser {
         } else return lineCopy.length() == 0;
     }
 
-    private static void contractionSpaces(ArrayList<String> text, int from, int to, int depth) throws InvalidFileFormatException {
-        if (text.size() == 0) throw new InvalidFileFormatException("Empty file");
+    private static void contractionSpaces(ArrayList<String> text, int from, int to, int depth) throws InvalidConfigFormatException {
+        if (text.size() == 0) throw new InvalidConfigFormatException("Data not found");
         int subSection = -1;
         int diff = UText.calcSpacesBefore(text.get(from)) - depth;
 
@@ -98,7 +98,7 @@ class ConfigParser {
         }
     }
 
-    private static Tree<String> startParse(ArrayList<String> text) throws InvalidFileFormatException {
+    private static Tree<String> startParse(ArrayList<String> text) throws InvalidConfigFormatException {
         Tree<String> configTree = new Tree<>();
         Node<String> node = configTree.getRoot();
         int prevDepth = 0;
@@ -123,9 +123,9 @@ class ConfigParser {
         return configTree;
     }
 
-    private static void addChild(Node<String> node, String data) throws InvalidFileFormatException {
+    private static void addChild(Node<String> node, String data) throws InvalidConfigFormatException {
         if (node.getChildren(data).size() > 0) {
-            throw new InvalidFileFormatException();
+            throw new InvalidConfigFormatException();
         }
         if (data.contains(UText.SLS)) {
             node.addChild(UText.trimLeft(data));

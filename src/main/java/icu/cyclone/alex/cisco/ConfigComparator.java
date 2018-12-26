@@ -1,9 +1,8 @@
 package icu.cyclone.alex.cisco;
 
-import icu.cyclone.alex.utils.Node;
-import icu.cyclone.alex.utils.Tree;
-import icu.cyclone.alex.utils.UDiff;
-import icu.cyclone.alex.utils.UText;
+import icu.cyclone.alex.cisco.reader.ConfigReader;
+import icu.cyclone.alex.cisco.reader.InvalidReadDataException;
+import icu.cyclone.alex.utils.*;
 
 import java.util.Comparator;
 import java.util.List;
@@ -19,9 +18,9 @@ public class ConfigComparator {
         compare(origin.getConfigTree(), compared.getConfigTree(), strictIndex);
     }
 
-    public ConfigComparator(String origin, String compared, int strictIndex) {
-        compare(Config.getNew().loadConfigFromFile(origin).getConfigTree(),
-                Config.getNew().loadConfigFromFile(compared).getConfigTree(),
+    public ConfigComparator(ConfigReader origin, ConfigReader compared, int strictIndex) throws InvalidReadDataException, InvalidConfigFormatException {
+        compare(Config.getNew().loadConfig(origin).getConfigTree(),
+                Config.getNew().loadConfig(compared).getConfigTree(),
                 strictIndex);
     }
 

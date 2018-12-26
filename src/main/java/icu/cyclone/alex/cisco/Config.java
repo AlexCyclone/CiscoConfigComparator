@@ -1,13 +1,8 @@
 package icu.cyclone.alex.cisco;
 
-import icu.cyclone.alex.utils.InvalidFileFormatException;
+import icu.cyclone.alex.cisco.reader.ConfigReader;
+import icu.cyclone.alex.cisco.reader.InvalidReadDataException;
 import icu.cyclone.alex.utils.Tree;
-import icu.cyclone.alex.utils.UFile;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 
 public class Config {
     private Tree<String> configTree;
@@ -28,16 +23,10 @@ public class Config {
         return configTree;
     }
 
-    public Config loadConfigFromFile(String filename) throws InvalidFileFormatException {
-        ArrayList<String> text;
-        try {
-            text = UFile.readToStrList(filename);
-        } catch (IOException e) {
-            throw new InvalidFileFormatException("Duplicate section was found");
-        }
-        configTree = ConfigParser.parse(text);
-        Path p = Paths.get(filename);
-        setName(p.toString());
+    public Config loadConfig(ConfigReader configReader) throws InvalidReadDataException, InvalidConfigFormatException {
+
+        configTree = ConfigParser.parse(configReader.read());
+        setName(configReader.getName());
         return this;
     }
 }

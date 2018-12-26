@@ -1,14 +1,13 @@
-package icu.cyclone.alex.utils;
+package icu.cyclone.alex.cisco;
 
-public class InvalidFileFormatException extends RuntimeException {
-
+public class InvalidConfigFormatException extends Exception {
     private String message;
 
-    public InvalidFileFormatException() {
+    public InvalidConfigFormatException() {
         setMessage("Unsupported signature was found");
     }
 
-    public InvalidFileFormatException(String message) {
+    public InvalidConfigFormatException(String message) {
         setMessage(message);
     }
 
