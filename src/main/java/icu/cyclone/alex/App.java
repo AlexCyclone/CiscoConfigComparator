@@ -10,8 +10,8 @@ import icu.cyclone.alex.cisco.reader.SSHConfigReader;
 public class App {
     public static void main(String[] args) {
         ConfigReader cr1 = new FileConfigReader("config1");
-        ConfigReader cr2 = new SSHConfigReader("fseadmin", "121.Quetzalc0@tl.10",
-                "82.207.89.142", 6022);
+        ConfigReader cr2 = new SSHConfigReader("user", "pass",
+                "82.207.89.1", 22);
         ConfigComparator diff;
         try {
             diff = new ConfigComparator(cr1, cr2, 2);
