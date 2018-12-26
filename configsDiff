@@ -2,7 +2,7 @@
  version 12.4
  parser view localadmin
   secret 5 $1$g1PL$M39BGA9Jthv1qfFdt9csD0
-! SECTION CHANGED ! secret 5 $1$qptk$eNT9/R/5hDTL0JgNxvZy61
+  ! SECTION CHANGED ! secret 5 $1$qptk$eNT9/R/5hDTL0JgNxvZy61
   commands exec exclude credential
   commands exec include all ssh
   commands exec include all telnet
@@ -19,7 +19,7 @@
  service password-encryption
  service sequence-numbers
  hostname R1861-nom
-! SECTION CHANGED ! hostname R1861-vov
+ ! SECTION CHANGED ! hostname R1861-vov
  boot-start-marker
   boot system flash:c1861-advipservicesk9-mz.124-24.T8.bin
   boot-end-marker
@@ -29,7 +29,7 @@
  no logging console
  no logging monitor
  enable secret 5 $1$.A1P$vHVQebiI538LdL9oIod7M/
-! SECTION CHANGED ! enable secret 5 $1$XZg6$mNnymhqPrLYAKWwUS0qK2/
+ ! SECTION CHANGED ! enable secret 5 $1$XZg6$mNnymhqPrLYAKWwUS0qK2/
  aaa new-model
  aaa authentication password-prompt "password: "
  aaa authentication username-prompt "login as: "
@@ -52,13 +52,13 @@
  no ip dhcp use vrf connected
  ip dhcp excluded-address 192.168.200.1
  ip dhcp excluded-address 10.104.26.65
-! SECTION CHANGED ! ip dhcp excluded-address 10.121.16.65
+ ! SECTION CHANGED ! ip dhcp excluded-address 10.121.16.65
  ip dhcp ping packets 4
  ip dhcp pool IP_Phones
   network 10.104.26.64 255.255.255.192
-! SECTION CHANGED ! network 10.121.16.64 255.255.255.192
+  ! SECTION CHANGED ! network 10.121.16.64 255.255.255.192
   default-router 10.104.26.65
-! SECTION CHANGED ! default-router 10.121.16.65
+  ! SECTION CHANGED ! default-router 10.121.16.65
   option 150 ip 10.11.2.20 10.11.2.21
  ip dhcp pool Isolated
   network 192.168.200.0 255.255.255.0
@@ -67,7 +67,7 @@
  no ip bootp server
  ip domain timeout 2
  ip domain name dp.fssu
-! SECTION CHANGED ! ip domain name kh.fssu
+ ! SECTION CHANGED ! ip domain name kh.fssu
  ip name-server 8.8.8.8
  ip inspect udp idle-time 35
  ip inspect tcp idle-time 1800
@@ -114,42 +114,42 @@
  object-group network EXCLUSIVE
  object-group network EXTADDR
   host 1.1.1.1
-! SECTION CHANGED ! host 2.2.2.2
+  ! SECTION CHANGED ! host 2.2.2.2
  object-group service INBOUNDSERVICES
   tcp eq 6022
  object-group network NAT
   192.168.200.0 255.255.255.0
        10.121.16.128 255.255.255.128
-! SECTION NOT FOUND IN config1 !
+  ! SECTION NOT FOUND IN config1 !
   10.104.26.128 255.255.255.128
-! SECTION NOT FOUND IN config2 !
+  ! SECTION NOT FOUND IN config2 !
   host 10.104.26.16
-! SECTION CHANGED ! host 10.121.16.16
+  ! SECTION CHANGED ! host 10.121.16.16
  object-group network OBLADDR
   host 3.3.3.3
   host 5.5.5.5
-! SECTION CHANGED ! host 4.4.4.4
+  ! SECTION CHANGED ! host 4.4.4.4
  object-group network TUN-MEMBERS
   172.20.0.0 255.255.0.0
   172.30.2.0 255.255.255.240
        10.121.1.12 255.255.255.252
-! SECTION NOT FOUND IN config1 !
+  ! SECTION NOT FOUND IN config1 !
        10.121.16.8 255.255.255.252
-! SECTION NOT FOUND IN config1 !
+  ! SECTION NOT FOUND IN config1 !
   10.104.1.12 255.255.255.252
-! SECTION NOT FOUND IN config2 !
+  ! SECTION NOT FOUND IN config2 !
   10.104.26.8 255.255.255.252
-! SECTION NOT FOUND IN config2 !
+  ! SECTION NOT FOUND IN config2 !
  object-group network V100INSPECT
        10.121.16.128 255.255.255.128
-! SECTION NOT FOUND IN config1 !
+  ! SECTION NOT FOUND IN config1 !
   10.104.26.128 255.255.255.128
-! SECTION NOT FOUND IN config2 !
+  ! SECTION NOT FOUND IN config2 !
  vtp mode transparent
  username fseadmin privilege 15 secret 5 $1$/0Id$FPmyPGaLTLOQaKJEfm2hH0
-! SECTION CHANGED ! username fseadmin privilege 15 secret 5 $1$MP04$iIpfS/iArf/X9SYzD4dL91
+ ! SECTION CHANGED ! username fseadmin privilege 15 secret 5 $1$MP04$iIpfS/iArf/X9SYzD4dL91
  username regadmin view localadmin secret 5 $1$j23D$35SY2rZ6Na9BGHTiESZE7/
-! SECTION CHANGED ! username regadmin view localadmin secret 5 $1$R57E$EsGbiQMtMfp3zHlVyrVwF1
+ ! SECTION CHANGED ! username regadmin view localadmin secret 5 $1$R57E$EsGbiQMtMfp3zHlVyrVwF1
  archive
   log config
    logging enable
@@ -196,13 +196,13 @@
    fair-queue
  interface Loopback0
   ip address 10.104.26.16 255.255.255.255
-! SECTION CHANGED ! ip address 10.121.16.16 255.255.255.255
+  ! SECTION CHANGED ! ip address 10.121.16.16 255.255.255.255
   ip nat inside
   ip virtual-reassembly
  interface Tunnel0
   bandwidth 100000
   ip address 172.20.4.26 255.255.0.0
-! SECTION CHANGED ! ip address 172.20.21.16 255.255.0.0
+  ! SECTION CHANGED ! ip address 172.20.21.16 255.255.0.0
   ip access-group TUN-IN in
   ip access-group TUN-OUT out
   no ip redirects
@@ -227,40 +227,40 @@
  interface FastEthernet0/0
   description MPLS
   ip address 10.104.26.2 255.255.255.252
-! SECTION CHANGED ! ip address 10.121.16.2 255.255.255.252
+  ! SECTION CHANGED ! ip address 10.121.16.2 255.255.255.252
   no ip unreachables
   duplex auto
   speed auto
   no cdp enable
  interface FastEthernet0/1/0
        switchport voice vlan 200
-! SECTION NOT FOUND IN config1 !
+  ! SECTION NOT FOUND IN config1 !
        auto qos voip
-! SECTION NOT FOUND IN config1 !
+  ! SECTION NOT FOUND IN config1 !
        service-policy output AutoQoS-Policy-UnTrust
-! SECTION NOT FOUND IN config1 !
+  ! SECTION NOT FOUND IN config1 !
   switchport access vlan 220
-! SECTION CHANGED ! switchport access vlan 100
+  ! SECTION CHANGED ! switchport access vlan 100
  interface FastEthernet0/1/1
        switchport voice vlan 200
-! SECTION NOT FOUND IN config1 !
+  ! SECTION NOT FOUND IN config1 !
        auto qos voip
-! SECTION NOT FOUND IN config1 !
+  ! SECTION NOT FOUND IN config1 !
        service-policy output AutoQoS-Policy-UnTrust
-! SECTION NOT FOUND IN config1 !
+  ! SECTION NOT FOUND IN config1 !
   switchport access vlan 221
-! SECTION CHANGED ! switchport access vlan 100
+  ! SECTION CHANGED ! switchport access vlan 100
  interface FastEthernet0/1/2
        switchport voice vlan 200
-! SECTION NOT FOUND IN config1 !
+  ! SECTION NOT FOUND IN config1 !
        auto qos voip
-! SECTION NOT FOUND IN config1 !
+  ! SECTION NOT FOUND IN config1 !
        service-policy output AutoQoS-Policy-UnTrust
-! SECTION NOT FOUND IN config1 !
+  ! SECTION NOT FOUND IN config1 !
   switchport access vlan 222
-! SECTION CHANGED ! switchport access vlan 100
+  ! SECTION CHANGED ! switchport access vlan 100
   no cdp enable
-! SECTION NOT FOUND IN config2 !
+  ! SECTION NOT FOUND IN config2 !
  interface FastEthernet0/1/3
   switchport access vlan 100
   switchport voice vlan 200
@@ -273,33 +273,33 @@
   service-policy output AutoQoS-Policy-UnTrust
  interface FastEthernet0/1/5
        no cdp enable
-! SECTION NOT FOUND IN config1 !
+  ! SECTION NOT FOUND IN config1 !
   switchport access vlan 100
-! SECTION CHANGED ! switchport access vlan 222
+  ! SECTION CHANGED ! switchport access vlan 222
   switchport voice vlan 200
-! SECTION NOT FOUND IN config2 !
+  ! SECTION NOT FOUND IN config2 !
   auto qos voip
-! SECTION NOT FOUND IN config2 !
+  ! SECTION NOT FOUND IN config2 !
   service-policy output AutoQoS-Policy-UnTrust
-! SECTION NOT FOUND IN config2 !
+  ! SECTION NOT FOUND IN config2 !
  interface FastEthernet0/1/6
   switchport access vlan 100
-! SECTION CHANGED ! switchport access vlan 221
+  ! SECTION CHANGED ! switchport access vlan 221
   switchport voice vlan 200
-! SECTION NOT FOUND IN config2 !
+  ! SECTION NOT FOUND IN config2 !
   auto qos voip
-! SECTION NOT FOUND IN config2 !
+  ! SECTION NOT FOUND IN config2 !
   service-policy output AutoQoS-Policy-UnTrust
-! SECTION NOT FOUND IN config2 !
+  ! SECTION NOT FOUND IN config2 !
  interface FastEthernet0/1/7
   switchport access vlan 100
-! SECTION CHANGED ! switchport access vlan 220
+  ! SECTION CHANGED ! switchport access vlan 220
   switchport voice vlan 200
-! SECTION NOT FOUND IN config2 !
+  ! SECTION NOT FOUND IN config2 !
   auto qos voip
-! SECTION NOT FOUND IN config2 !
+  ! SECTION NOT FOUND IN config2 !
   service-policy output AutoQoS-Policy-UnTrust
-! SECTION NOT FOUND IN config2 !
+  ! SECTION NOT FOUND IN config2 !
  interface FastEthernet0/1/8
   shutdown
  interface Vlan1
@@ -307,7 +307,7 @@
  interface Vlan10
   description SRV
   ip address 10.104.26.49 255.255.255.240
-! SECTION CHANGED ! ip address 10.121.16.49 255.255.255.240
+  ! SECTION CHANGED ! ip address 10.121.16.49 255.255.255.240
   ip access-group SrvIn in
   ip access-group SrvOut out
   ip nat inside
@@ -316,7 +316,7 @@
  interface Vlan100
   description Data
   ip address 10.104.26.129 255.255.255.128
-! SECTION CHANGED ! ip address 10.121.16.129 255.255.255.128
+  ! SECTION CHANGED ! ip address 10.121.16.129 255.255.255.128
   ip access-group DataToAny in
   ip access-group AnyToData out
   ip nat inside
@@ -325,15 +325,15 @@
  interface Vlan200
   description Voice
   ip address 10.104.26.65 255.255.255.192
-! SECTION CHANGED ! ip address 10.121.16.65 255.255.255.192
+  ! SECTION CHANGED ! ip address 10.121.16.65 255.255.255.192
  interface Vlan220
   description to Gate
   ip address 10.104.26.5 255.255.255.252
-! SECTION CHANGED ! ip address 10.121.16.5 255.255.255.252
+  ! SECTION CHANGED ! ip address 10.121.16.5 255.255.255.252
  interface Vlan221
   description from Gate
   ip address 10.104.26.9 255.255.255.252
-! SECTION CHANGED ! ip address 10.121.16.9 255.255.255.252
+  ! SECTION CHANGED ! ip address 10.121.16.9 255.255.255.252
  interface Vlan222
   description ISP
   ip address dhcp
@@ -352,7 +352,7 @@
  interface Vlan300
   description MGMT
   ip address 10.104.26.33 255.255.255.240
-! SECTION CHANGED ! ip address 10.121.16.33 255.255.255.240
+  ! SECTION CHANGED ! ip address 10.121.16.33 255.255.255.240
  interface Vlan550
   description Isolated
   ip address 192.168.200.1 255.255.255.0
@@ -371,7 +371,7 @@
   passive-interface default
   no passive-interface Tunnel0
   network 10.104.26.8 0.0.0.3
-! SECTION CHANGED ! network 10.121.16.8 0.0.0.3
+  ! SECTION CHANGED ! network 10.121.16.8 0.0.0.3
   network 172.20.0.0
   distribute-list prefix EIGRP-OUT out
   distribute-list prefix EIGRP-IN in
@@ -384,17 +384,17 @@
   no auto-summary
  ip forward-protocol nd
  ip route 10.0.0.0 255.0.0.0 10.104.26.1 220
-! SECTION CHANGED ! ip route 10.0.0.0 255.0.0.0 10.121.16.1 220
+ ! SECTION CHANGED ! ip route 10.0.0.0 255.0.0.0 10.121.16.1 220
  ip route 10.104.0.0 255.255.0.0 10.104.26.1 220
-! SECTION CHANGED ! ip route 10.121.0.0 255.255.0.0 10.121.16.1 220
+ ! SECTION CHANGED ! ip route 10.121.0.0 255.255.0.0 10.121.16.1 220
  ip route 10.104.1.12 255.255.255.252 10.104.26.1 220
-! SECTION CHANGED ! ip route 10.121.1.12 255.255.255.252 10.121.16.1 220
+ ! SECTION CHANGED ! ip route 10.121.1.12 255.255.255.252 10.121.16.1 220
  ip route 10.104.255.0 255.255.255.0 10.104.26.6
-! SECTION CHANGED ! ip route 10.121.255.0 255.255.255.0 10.121.16.6
+ ! SECTION CHANGED ! ip route 10.121.255.0 255.255.255.0 10.121.16.6
  ip route 10.255.255.0 255.255.255.0 10.104.26.6
-! SECTION CHANGED ! ip route 10.255.255.0 255.255.255.0 10.121.16.6
+ ! SECTION CHANGED ! ip route 10.255.255.0 255.255.255.0 10.121.16.6
  ip route 172.16.0.0 255.240.0.0 10.104.26.1 220
-! SECTION CHANGED ! ip route 172.16.0.0 255.240.0.0 10.121.16.1 220
+ ! SECTION CHANGED ! ip route 172.16.0.0 255.240.0.0 10.121.16.1 220
  no ip http server
  no ip http secure-server
  ip dns view FSSU
@@ -473,16 +473,16 @@
   permit eigrp any any
  ip prefix-list EIGRP-IN seq 10 permit 172.30.2.0/28
  ip prefix-list EIGRP-IN seq 20 permit 10.104.1.12/30
-! SECTION CHANGED ! ip prefix-list EIGRP-IN seq 20 permit 10.121.1.12/30
+ ! SECTION CHANGED ! ip prefix-list EIGRP-IN seq 20 permit 10.121.1.12/30
  ip prefix-list EIGRP-OUT seq 10 permit 10.104.26.8/30
-! SECTION CHANGED ! ip prefix-list EIGRP-OUT seq 10 permit 10.121.16.8/30
+ ! SECTION CHANGED ! ip prefix-list EIGRP-OUT seq 10 permit 10.121.16.8/30
  ip sla 1
   icmp-echo 10.255.255.1 source-interface Vlan220
   frequency 30
  ip sla schedule 1 life forever start-time now
  ip sla 2
   icmp-echo 10.104.255.1 source-interface Vlan220
-! SECTION CHANGED ! icmp-echo 10.121.255.1 source-interface Vlan220
+  ! SECTION CHANGED ! icmp-echo 10.121.255.1 source-interface Vlan220
   frequency 30
  ip sla schedule 2 life forever start-time now
  logging trap notifications
@@ -506,11 +506,10 @@
   description Music On Hold Port
  banner login
   ^
-UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED
-You must have explicit, authorized permission to access or configure this device.
-Unauthorized attempts and actions to access or use this system may result in criminal penalties.
-All activities performed on this device are logged and monitored.
-
+  UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED
+  You must have explicit, authorized permission to access or configure this device.
+  Unauthorized attempts and actions to access or use this system may result in criminal penalties.
+  All activities performed on this device are logged and monitored.
  line con 0
   exec-timeout 5 0
   logging synchronous

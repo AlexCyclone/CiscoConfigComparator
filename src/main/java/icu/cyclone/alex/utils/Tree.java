@@ -32,6 +32,7 @@ public class Tree<T> {
         return root.getData() + System.lineSeparator()
                 + childToStrWithTreePrefix(root, "");
     }
+
     public String toStringTree(String depthPrefix) {
         return root.getData() + System.lineSeparator()
                 + childToStrWithDepthPrefix(root, depthPrefix);
@@ -64,12 +65,12 @@ public class Tree<T> {
             return "";
         }
 
+        String prefix = UText.stringRepeat(depthPrefix, node.parentsCount() + 1);
         StringBuilder sb = new StringBuilder();
-        for (Node<T> n: node.getChildren()) {
-            sb.append(UText.stringRepeat(depthPrefix, n.parentsCount()))
-                    .append(n.getData())
+        for (Node<T> n : node.getChildren()) {
+            sb.append(UText.eachLineWithPrefix(n.getData().toString(), prefix, prefix))
                     .append(System.lineSeparator())
-                    .append(childToStrWithDepthPrefix(n,depthPrefix));
+                    .append(childToStrWithDepthPrefix(n, depthPrefix));
         }
         return sb.toString();
     }
