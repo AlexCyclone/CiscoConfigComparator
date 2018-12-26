@@ -1,11 +1,11 @@
 package icu.cyclone.alex.cisco;
 
-import icu.cyclone.alex.cisco.reader.InvalidReadDataException;
 import icu.cyclone.alex.utils.Node;
 import icu.cyclone.alex.utils.Tree;
 import icu.cyclone.alex.utils.UText;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 class ConfigParser {
     static Tree<String> parse(ArrayList<String> text) throws InvalidConfigFormatException {
@@ -15,9 +15,30 @@ class ConfigParser {
 
     private static void preParse(ArrayList<String> text) throws InvalidConfigFormatException {
         reformatBanners(text);
-        text.removeIf(ConfigParser::isEmptyLine);
+        removeEmptyLine(text);
         contractionSpaces(text, 0, text.size() - 1, 0);
         expandBootSection(text);
+    }
+
+    private static void removeEmptyLine(ArrayList<String> text) throws InvalidConfigFormatException {
+        text.removeIf(ConfigParser::isEmptyLine);
+        boolean begin = false;
+        boolean end = false;
+
+        Iterator<String> iter = text.iterator();
+        while (iter.hasNext()) {
+            String line = iter.next();
+            begin = begin || isBeginSequence(line);
+
+            if (!begin || end) {
+                iter.remove();
+            }
+            end = end || isEndSequence(line);
+        }
+
+        if (text.size() == 0) {
+            throw new InvalidConfigFormatException();
+        }
     }
 
     private static void reformatBanners(ArrayList<String> text) {
@@ -44,6 +65,20 @@ class ConfigParser {
                 banner = new StringBuilder();
             }
         }
+    }
+
+    private static boolean isBeginSequence(String line) {
+        if (UText.firstWord(line.trim()).equals("version")) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isEndSequence(String line) {
+        if (line.trim().equals("end")) {
+            return true;
+        }
+        return false;
     }
 
     private static void replaceSection(ArrayList<String> text, int from, int to, String section, String data) {

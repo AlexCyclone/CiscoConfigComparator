@@ -1,3 +1,4 @@
+should be removed
 version 12.4
 parser view localadmin
  secret 5 $1$g1PL$M39BGA9Jthv1qfFdt9csD0
@@ -585,3 +586,4 @@ ntp access-group peer NTPSrv
 ntp update-calendar
 ntp server 10.11.6.1 prefer
 end
+should be removed
